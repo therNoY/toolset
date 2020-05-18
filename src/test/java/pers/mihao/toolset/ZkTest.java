@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class ZkTest {
+	
     private static String scheme = "digest";
 
     public ZooKeeper zk = null;
