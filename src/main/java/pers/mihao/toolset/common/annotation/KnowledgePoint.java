@@ -10,7 +10,7 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 
 /**
- * 知识点注解 方便找知识点
+ * 知识点注解 方便找知识点 或者容易出错的地方
  */
 @Target({ElementType.FIELD, ElementType.METHOD})
 @Retention(SOURCE)

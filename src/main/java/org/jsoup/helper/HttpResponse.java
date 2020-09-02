@@ -66,10 +66,11 @@ public class HttpResponse {
         }else if (jsonBody != null) {
             return jsonBody.toString();
         }else if (document != null){
-            return document.toString();
+            return document.body().text();
         }
         return null;
     }
+
 
     public HttpConnection.Response getResponse() {
         return response;

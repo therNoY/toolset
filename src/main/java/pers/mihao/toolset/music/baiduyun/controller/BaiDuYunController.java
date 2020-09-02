@@ -31,7 +31,7 @@ public class BaiDuYunController {
 
     public static void main(String[] args) {
         BaiDuYunController baiDuYunController = new BaiDuYunController();
-        String url = "https://pan.baidu.com/share/link?uk=773838040&shareid=370529";
+        String url = "https://pan.baidu.com/s/1kVxZGZP?fid=307248557701380";
         String url2 = "https://pan.baidu.com/s/1hsghcDQ?fid=845533529949131";
         ValidatorDTO validatorDTO = baiDuYunController.getVerification(url);
         logger.info(validatorDTO.getRealDownloadURL());
@@ -48,23 +48,14 @@ public class BaiDuYunController {
         url = url.replace("??", "&");
         ValidatorDTO validatorDTO = new ValidatorDTO();
         String cookie = null;
-        String fileName = null;
-        String fileSize = null;
 
         // 1. 第一次获取cookie 连接信息 将服务端返回的cookie信息设置到放到下次发送的cookie中
-        logger.info("第一次发送Get请求, 获取Cookie信息 和其他参数信息");
+        logger.info("发送第一次Get请求, 获取Cookie信息 和其他参数信息");
         HttpResponse response = HttpUtil.get(url, cookie);
         cookie = "PANWEB=1;" + response.getCookie().split(";")[0];
         validatorDTO.setCookie(cookie);
-        /*Map<String, String> respAndCookie = AnalyzeBaiduYunHttp.getRespAndCookie(url, cookie);
-        // 1.1 修改cookie 抓包看到携带了PANWEB1，不设置也没问题
-        cookie = "PANWEB=1;" + respAndCookie.getMap("cookie").split(";")[0];
-        validatorDTO.setCookie(cookie);*/
         // 2.通过返回的信息获取参数
         Map<String, String> resultMap = getBodyParams(response.body());
-        // 2.1 设置下载属性
-        fileName = resultMap.get("server_filename");
-        fileSize = resultMap.get("size");
 
         // 3. 发送post下载请求
         // 3.1 拼接post的url地址
@@ -108,16 +99,17 @@ public class BaiDuYunController {
         return realDownloadURL;
     }
     /**
+     * 从第一次请求中获取参数信息
      * 正则匹配出json字符串，将json字符串转化为java对象。
      */
     public Map<String, String> getBodyParams(String body) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         String setData = "";
-        Pattern pattern_setData = Pattern.compile("setData.*?;");
-        Matcher matcher_setData = pattern_setData.matcher(body);
-        if (matcher_setData.find()) {
-            String tmp = matcher_setData.group(0);
-            setData = tmp.substring(8, tmp.length() - 2);
+        Pattern patternSetData = Pattern.compile("setData.*?;");
+        Matcher matcherSetData = patternSetData.matcher(body);
+        if (matcherSetData.find()) {
+            String tmp = matcherSetData.group(0);
+            setData = tmp.substring(tmp.indexOf("{"), tmp.length() - 2);
             SetDataBean bean = JSON.parseObject(setData, SetDataBean.class);
             map.put("sign", bean.getSign());
             map.put("timestamp", bean.getTimestamp());
@@ -148,8 +140,8 @@ public class BaiDuYunController {
         sb1.append("&web=1");
         sb1.append("&tsl=800");
         sb1.append("&app_id=" + params.get("app_id"));
-        String post_url = sb1.toString();
-        return post_url;
+        String postUrl = sb1.toString();
+        return postUrl;
     }
 
     /**

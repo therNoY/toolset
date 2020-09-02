@@ -28,7 +28,9 @@ public interface PostmanItemService extends IService<PostmanItem> {
 
     PostmanItem addNewItem(int userId, ReqCollectIdDto collectId);
 
-    RespResponse sendHttp(PostmanItem item);
+    PostmanItem sendHttp(PostmanItem item, boolean addDefaultHeads);
+
+    boolean sendHttpForRes(PostmanItem item, boolean addDefaultHeads);
 
     List<PostmanItem> getUserSaveItem(Integer userId);
 

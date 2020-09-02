@@ -1053,8 +1053,9 @@ public class HttpConnection implements Connection {
 
             StringBuffer sb = new StringBuffer();
             byte[] bodyRead = new byte[1024];
-            while (bodyStream.read(bodyRead, 0, 1024) != -1) {
-                sb.append(new String(bodyRead));
+            int length;
+            while ((length = bodyStream.read(bodyRead)) != -1) {
+                sb.append(new String(bodyRead, 0, length, "UTF-8"));
             }
 
             JSONObject jsonObject = null;

@@ -138,7 +138,7 @@ public class PostManItemController {
         PostmanItem item = itemService.getById(reqIdDto.getId());
         PostManDetail detail = JSON.parseObject(item.getDetail(), PostManDetail.class);
         item.setPostManDetail(detail);
-        RespResponse respResponse = itemService.sendHttp(item);
+        PostmanItem respResponse = itemService.sendHttp(item, true);
         if (respResponse != null) {
             return RespHelper.success(respResponse);
         }

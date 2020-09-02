@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import pers.mihao.toolset.common.annotation.KnowledgePoint;
 import pers.mihao.toolset.common.constant.RedisKey;
 import pers.mihao.toolset.common.util.AuthUtil;
 import pers.mihao.toolset.common.util.EnumUtil;
@@ -68,11 +69,7 @@ public class PostmanItemServiceImpl extends ServiceImpl<PostmanItemDao, PostmanI
     @Cacheable(RedisKey.USER_POSTMAN_EDIT)
     public List<PostmanItem> getUserEdit(Integer userId) {
         List<PostmanItem> editList = postmanItemDao.getUserItemByStatus(userId, ItemStatus.EDIT, ItemStatus.SAVE_AND_EDIT);
-        editList.forEach(postmanItem -> {
-            PostManDetail detail = JSON.parseObject(postmanItem.getDetail(), PostManDetail.class);
-            postmanItem.setPostManDetail(detail);
-            postmanItem.setLabel(postmanItem.getUrl());
-        });
+        editList.forEach(postmanItem -> warpPostmanItem(postmanItem));
         return editList;
     }
 
@@ -110,10 +107,11 @@ public class PostmanItemServiceImpl extends ServiceImpl<PostmanItemDao, PostmanI
      * @param updateItem
      * @return
      */
+    @KnowledgePoint("将Integer 与 int比较的时候如果Integer 对象是空会空指针")
     @Override
     public PostmanItem updateItem(ReqUpdateItem updateItem) {
         updateItem.setDetail(JSON.toJSONString(updateItem.getPostManDetail()));
-        if (!PostmanConst.emptyUrl.equals(updateItem.getLabel())) {
+        if (!PostmanConst.emptyUrl.equals(updateItem.getLabel()) && updateItem.getLabel() != null) {
             updateItem.setUrl(getUrl(updateItem));
         } else {
             updateItem.setUrl(updateItem.getLabel());
@@ -121,7 +119,7 @@ public class PostmanItemServiceImpl extends ServiceImpl<PostmanItemDao, PostmanI
 
 
         // 如果现在是最开始的版本就需要备份
-        if (updateItem.getLastVersionId() == defaultItemVersionId) {
+        if (updateItem.getLastVersionId() == null || updateItem.getLastVersionId() == defaultItemVersionId) {
             PostmanItem item = getById(updateItem.getId());
             item.setId(null);
             item.setStatus(ItemStatus.EDIT_HISTORY);
@@ -234,11 +232,33 @@ public class PostmanItemServiceImpl extends ServiceImpl<PostmanItemDao, PostmanI
      * 发送http请求
      *
      * @param item
+     * @param addDefaultHeads
      * @return
      */
     @Override
-    public RespResponse sendHttp(PostmanItem item) {
+    public PostmanItem sendHttp(PostmanItem item, boolean addDefaultHeads) {
+        if (sendHttpForRes(item, addDefaultHeads)) return null;
+        // 增加历史纪录
+        PostmanHistory history = new PostmanHistory();
+        history.setUrl(item.getUrl());
+        history.setUserId(AuthUtil.getAuthId());
+        history.setType(item.getType());
+        history.setCreateDate(LocalDateTime.now());
+        history.setDetail(JSON.toJSONString(item.getPostManDetail()));
+        postmanHistoryService.save(history);
 
+        updateById(item);
+        item.setLabel(item.getUrl());
+        return item;
+    }
+
+    /**
+     * 发送http
+     * @param item
+     * @param addDefaultHeads
+     * @return
+     */
+    public boolean sendHttpForRes(PostmanItem item, boolean addDefaultHeads) {
         log.info("准备发送http请求{}", item);
 
         HttpConnection httpConnection = (HttpConnection) Jsoup.connect(item.getUrl());
@@ -252,21 +272,26 @@ public class PostmanItemServiceImpl extends ServiceImpl<PostmanItemDao, PostmanI
             }
         }
 
-//         设置默认请求头
+        //设置默认请求头
         List<MapEntry<String>> addDefaultHeaders = new ArrayList<>();
-        for (CommonHeader commonHeader : commonHeaders) {
-            if (commonHeader.getDefaultUse().equals(1) && !httpConnection.request().hasHeader(commonHeader.getKey())) {
-                httpConnection.header(commonHeader.getKey(), commonHeader.getDefaultValue());
-                addDefaultHeaders.add(new MapEntry<>(commonHeader.getKey(), commonHeader.getDefaultValue()));
+        if (addDefaultHeads) {
+            for (CommonHeader commonHeader : commonHeaders) {
+                if (commonHeader.getDefaultUse().equals(1) && !httpConnection.request().hasHeader(commonHeader.getKey())) {
+                    httpConnection.header(commonHeader.getKey(), commonHeader.getDefaultValue());
+                    addDefaultHeaders.add(new MapEntry<>(commonHeader.getKey(), commonHeader.getDefaultValue()));
+                }
             }
         }
 
+        // 设置auth
         MapEntry<String> authKey = item.getPostManDetail().getAuth();
         if (authKey.getV() != null) {
             if (authKey.getK().equals("Bearer Token")) {
                 httpConnection.header(HttpConnection.AuthKey, "Bearer " + authKey.getV());
             }
         }
+
+
 
         try {
             String body = item.getPostManDetail().getBody();
@@ -275,7 +300,7 @@ public class PostmanItemServiceImpl extends ServiceImpl<PostmanItemDao, PostmanI
                httpConnection.request().jsonData().putAll(jsonObject.getInnerMap());
         } catch (Exception e) {
             log.error("", e);
-            return null;
+            return true;
         }
 
         HttpResponse response = null;
@@ -310,14 +335,14 @@ public class PostmanItemServiceImpl extends ServiceImpl<PostmanItemDao, PostmanI
         long end = System.currentTimeMillis();
         // 构建返回的resp
         if (response == null) {
-            return null;
+            return true;
         }
         HttpConnection.Response res = response.getResponse();
-        RespResponse respResponse = new RespResponse();
-        respResponse.setStatusCode(res.statusCode());
-        respResponse.setStatsMes(res.statusMessage());
-        respResponse.setTimer(end - start);
-        respResponse.setResBody(response.body());
+        item.setStatusCode(res.statusCode());
+        item.setStatsMes(res.statusMessage());
+        item.setTimer(end - start);
+        item.setResBody(response.body());
+        item.setRespBody(response.body());
 
         List<MapEntry<String>> headers = new ArrayList<>();
         Map<String, List<String>> allHeaders = res.allHeaders();
@@ -330,21 +355,20 @@ public class PostmanItemServiceImpl extends ServiceImpl<PostmanItemDao, PostmanI
                 headers.add(mapEntry);
             }
         });
-        respResponse.setHeaders(headers);
-        respResponse.setCookies(MapEntry.mapToMapEntryList(res.cookies()));
-        respResponse.setContentType(res.contentType() == null ? "text/html" : res.contentType());
-        respResponse.setAddHeaders(addDefaultHeaders);
 
-        // 增加历史纪录
-        PostmanHistory history = new PostmanHistory();
-        history.setUrl(item.getUrl());
-        history.setUserId(AuthUtil.getAuthId());
-        history.setType(item.getType());
-        history.setCreateDate(LocalDateTime.now());
-        history.setDetail(JSON.toJSONString(item.getPostManDetail()));
-        postmanHistoryService.save(history);
+        item.setHeaders(JSON.toJSONString(headers));
+        item.setRespHeaders(headers);
 
-        return respResponse;
+        List<MapEntry<String>> mapEntries = MapEntry.mapToMapEntryList(res.cookies());
+        item.setCookies(JSON.toJSONString(mapEntries));
+        item.setRespCookies(mapEntries);
+        item.setContentType(res.contentType() == null ? "text/html" : res.contentType());
+
+        if (addDefaultHeads) {
+            item.setRespAddHeaders(addDefaultHeaders);
+            item.setAddHeaders(JSON.toJSONString(addDefaultHeaders));
+        }
+        return false;
     }
 
     @Override
@@ -462,7 +486,26 @@ public class PostmanItemServiceImpl extends ServiceImpl<PostmanItemDao, PostmanI
 
     public PostmanItem warpPostmanItem(PostmanItem item) {
         item.setLabel(item.getUrl());
-        item.setPostManDetail(JSON.parseObject(item.getDetail(), PostManDetail.class));
+
+        if (item.getDetail() != null){
+            item.setPostManDetail(JSON.parseObject(item.getDetail(), PostManDetail.class));
+        }
+
+        if (item.getCookies() != null)
+            item.setRespCookies(JSONObject.parseArray(item.getCookies(), MapEntry.class));
+
+        if (item.getResBody() != null) {
+            item.setRespBody(JSONObject.parseObject(item.getResBody()));
+        }
+
+        if (item.getAddHeaders() != null) {
+            item.setRespAddHeaders(JSONObject.parseArray(item.getCookies(), MapEntry.class));
+        }
+
+        if (item.getHeaders() != null) {
+            item.setRespHeaders(JSONObject.parseArray(item.getCookies(), MapEntry.class));
+        }
+
         return item;
     }
 }

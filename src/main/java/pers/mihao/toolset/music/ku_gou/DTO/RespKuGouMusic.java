@@ -71,15 +71,64 @@ public class RespKuGouMusic {
     private String albumid;
     private String singerName;
     private String extName;
+    private String albumName;
     private String songName;
+
+    private String authorName;
+
+
+    private String img;
+    private String playUrl;
+
     private String hash;
     private String imgUrl;
     private String albumAudioId;
     private String reqHash;
     private String singerId;
     private String fileName;
+    private String lyrics;
     private String[] backupUrl;
+    private String timelength;
 
+    public String getTimelength() {
+        return timelength;
+    }
+
+    public void setTimelength(String timelength) {
+        this.timelength = timelength;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getPlayUrl() {
+        return playUrl;
+    }
+
+    public void setPlayUrl(String playUrl) {
+        this.playUrl = playUrl;
+    }
+
+    public String getLyrics() {
+        return lyrics;
+    }
+
+    public void setLyrics(String lyrics) {
+        this.lyrics = lyrics;
+    }
+
+    public String getAlbumName() {
+        return albumName;
+    }
+
+    public void setAlbumName(String albumName) {
+        this.albumName = albumName;
+    }
 
     public JSONObject getExtra() {
         return extra;
@@ -215,5 +264,13 @@ public class RespKuGouMusic {
 
     public void setBackupUrl(String[] backupUrl) {
         this.backupUrl = backupUrl;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 }

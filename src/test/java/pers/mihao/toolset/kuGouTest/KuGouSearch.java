@@ -22,7 +22,7 @@ public class KuGouSearch {
 
     @Test
     public void name() throws IOException {
-        List<KuGouMusic> musics = kuGouMusicController.getMusicByName("花粥-浮白", 1, 30);
+        List<KuGouMusic> musics = (List<KuGouMusic>) kuGouMusicController.getMusicByName("花粥-浮白", 1, 30).getResVal();
 
         RespKuGouMusic respKuGouMusic = kuGouMusicController.getMusicByHash(musics.get(0).getFileHash());
 

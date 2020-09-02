@@ -4,10 +4,12 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import pers.mihao.toolset.postman.dto.MapEntry;
 import pers.mihao.toolset.postman.dto.PostManDetail;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class PostmanItem implements Serializable {
 
@@ -70,6 +72,67 @@ public class PostmanItem implements Serializable {
 
     @TableField(exist = false)
     private PostManDetail postManDetail;
+
+    @JsonIgnore
+    private String addHeaders;
+
+    private Integer bodySize;
+    private String contentType;
+    @JsonIgnore
+    private String cookies;
+    @JsonIgnore
+    private String headers;
+
+    private Integer headersSize;
+
+    @JsonIgnore
+    private String resBody;
+
+    private String statsMes;
+
+    private Integer statusCode;
+
+    private Long timer;
+    @TableField(exist = false)
+    private List<MapEntry<String>> respCookies;
+    @TableField(exist = false)
+    private List<MapEntry<String>> respHeaders;
+    @TableField(exist = false)
+    private List<MapEntry<String>> respAddHeaders;
+    @TableField(exist = false)
+    private Object respBody;
+
+    public List<MapEntry<String>> getRespCookies() {
+        return respCookies;
+    }
+
+    public void setRespCookies(List respCookies) {
+        this.respCookies = respCookies;
+    }
+
+    public List<MapEntry<String>> getRespHeaders() {
+        return respHeaders;
+    }
+
+    public void setRespHeaders(List respHeaders) {
+        this.respHeaders = respHeaders;
+    }
+
+    public List<MapEntry<String>> getRespAddHeaders() {
+        return respAddHeaders;
+    }
+
+    public void setRespAddHeaders(List respAddHeaders) {
+        this.respAddHeaders = respAddHeaders;
+    }
+
+    public Object getRespBody() {
+        return respBody;
+    }
+
+    public void setRespBody(Object respBody) {
+        this.respBody = respBody;
+    }
 
     public Integer getLastVersionId() {
         return lastVersionId;
@@ -147,6 +210,86 @@ public class PostmanItem implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAddHeaders() {
+        return addHeaders;
+    }
+
+    public void setAddHeaders(String addHeaders) {
+        this.addHeaders = addHeaders;
+    }
+
+    public Integer getBodySize() {
+        return bodySize;
+    }
+
+    public void setBodySize(Integer bodySize) {
+        this.bodySize = bodySize;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public String getCookies() {
+        return cookies;
+    }
+
+    public void setCookies(String cookies) {
+        this.cookies = cookies;
+    }
+
+    public String getHeaders() {
+        return headers;
+    }
+
+    public void setHeaders(String headers) {
+        this.headers = headers;
+    }
+
+    public Integer getHeadersSize() {
+        return headersSize;
+    }
+
+    public void setHeadersSize(Integer headersSize) {
+        this.headersSize = headersSize;
+    }
+
+    public String getResBody() {
+        return resBody;
+    }
+
+    public void setResBody(String resBody) {
+        this.resBody = resBody;
+    }
+
+    public String getStatsMes() {
+        return statsMes;
+    }
+
+    public void setStatsMes(String statsMes) {
+        this.statsMes = statsMes;
+    }
+
+    public Integer getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public Long getTimer() {
+        return timer;
+    }
+
+    public void setTimer(Long timer) {
+        this.timer = timer;
     }
 
     @Override

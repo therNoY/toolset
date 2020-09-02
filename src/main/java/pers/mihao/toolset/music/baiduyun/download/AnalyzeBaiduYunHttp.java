@@ -4,9 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -225,8 +223,6 @@ public class AnalyzeBaiduYunHttp {
 			}
 			connection.setRequestProperty("Accept", "*/*"); // 设置接收数据的格式
 			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8"); // 设置发送数据的格式
-
-			connection.connect();
 			OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream(), "UTF-8"); // utf-8编码
 			StringBuffer sb = new StringBuffer();
 			for (String s : params.keySet()) {

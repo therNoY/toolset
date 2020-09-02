@@ -2,7 +2,7 @@
 package pers.mihao.toolset.music.baiduyun.dto;
 
 /**
- * 初始获得的数据
+ * 第一次请求从response中获取的信息
  */
 public class SetDataBean {
 
@@ -13,7 +13,6 @@ public class SetDataBean {
 	private String shareid;
 	private FileList file_list;
 	
-
 	public String getSign() {
 		return sign;
 	}
