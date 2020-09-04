@@ -1,7 +1,7 @@
 package pers.mihao.toolset.client.redis;
 
 
-import pers.mihao.toolset.serverClient.base.DataSourceConfig;
+import pers.mihao.toolset.serverClient.DataSourceConfig;
 
 public class RedisSource extends DataSourceConfig {
 

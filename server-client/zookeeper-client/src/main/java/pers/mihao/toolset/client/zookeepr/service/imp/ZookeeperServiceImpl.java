@@ -9,16 +9,16 @@ import org.springframework.stereotype.Service;
 import pers.mihao.toolset.client.zookeepr.dao.ZkSourceDao;
 import pers.mihao.toolset.client.zookeepr.entity.ZkSource;
 import pers.mihao.toolset.client.zookeepr.service.ZookeeperService;
-import pers.mihao.toolset.serverClient.base.ClientNode;
-import pers.mihao.toolset.serverClient.base.DataSourceConfig;
-import pers.mihao.toolset.serverClient.base.dto.ReqTestConn;
-import pers.mihao.toolset.serverClient.base.service.BaseSourceService;
-import pers.mihao.toolset.util.AuthUtil;
+import pers.mihao.toolset.serverClient.ClientNode;
+import pers.mihao.toolset.serverClient.DataSourceConfig;
+import pers.mihao.toolset.serverClient.dto.ReqTestConn;
+import pers.mihao.toolset.serverClient.service.ClientService;
+import pers.mihao.toolset.auth.AuthUtil;
 
 
 @Service
 public class ZookeeperServiceImpl extends ServiceImpl<ZkSourceDao, ZkSource> implements ZookeeperService,
-    BaseSourceService {
+    ClientService {
 
     @Autowired
     ZkSourceDao zkSourceDao;

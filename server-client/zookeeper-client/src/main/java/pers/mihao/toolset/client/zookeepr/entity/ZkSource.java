@@ -1,7 +1,7 @@
 package pers.mihao.toolset.client.zookeepr.entity;
 
 
-import pers.mihao.toolset.serverClient.base.DataSourceConfig;
+import pers.mihao.toolset.serverClient.DataSourceConfig;
 
 /**
  * <p>

@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pers.mihao.toolset.serverClient.base.ClientNode;
-import pers.mihao.toolset.serverClient.base.dto.ReqTestConn;
-import pers.mihao.toolset.serverClient.base.enums.ClientTypeEnum;
-import pers.mihao.toolset.serverClient.base.service.BaseSourceService;
+import pers.mihao.toolset.serverClient.ClientNode;
+import pers.mihao.toolset.serverClient.dto.ReqTestConn;
+import pers.mihao.toolset.serverClient.enums.ClientTypeEnum;
+import pers.mihao.toolset.serverClient.service.ClientService;
 import pers.mihao.toolset.util.ApplicationContextHolder;
 import pers.mihao.toolset.util.EnumUtil;
 import pers.mihao.toolset.util.RespHelper;
@@ -28,9 +28,9 @@ public class DispatchController {
      */
     @GetMapping("/api/connect/list")
     public RespResult getConnectList(@RequestParam String type) {
-        BaseSourceService baseSourceService = getHandelControllerByType(type);
-        List<ClientNode> dateSource = null;
-        dateSource = baseSourceService.getSourceNodeList();
+        ClientService clientService = getHandelControllerByType(type);
+        List<ClientNode> dateSource;
+        dateSource = clientService.getSourceNodeList();
         return RespHelper.success(dateSource);
     }
 
@@ -39,19 +39,20 @@ public class DispatchController {
      * */
     @PostMapping("/api/connect/test")
     public RespResult testConnect(@Validated @RequestBody ReqTestConn reqTestConn, BindingResult result) {
-        BaseSourceService baseSourceService = getHandelControllerByType(reqTestConn.getType());
-        String connResult = baseSourceService.testConnect(reqTestConn);
+        ClientService clientService = getHandelControllerByType(reqTestConn.getType());
+        String connResult = clientService.testConnect(reqTestConn);
         return RespHelper.success(connResult);
     }
 
-    private BaseSourceService getHandelControllerByType(String type) {
-        BaseSourceService baseSourceService = null;
+    /**
+     * 根据传过来的类型获取对应的处理类
+     * @param type
+     * @return
+     */
+    private ClientService getHandelControllerByType(String type) {
+        ClientService clientService;
         ClientTypeEnum clientTypeEnum = EnumUtil.valueOf(ClientTypeEnum.class, type);
-        switch (clientTypeEnum) {
-            case ZOOKEEPER:
-                baseSourceService = ApplicationContextHolder.getBean("ZookeeperService");
-                break;
-        }
-        return baseSourceService;
+        clientService = ApplicationContextHolder.getBean(clientTypeEnum.serverName);
+        return clientService;
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import pers.mihao.toolset.annotation.KnowledgePoint;
+import pers.mihao.toolset.common.annotation.KnowledgePoint;
 import pers.mihao.toolset.net.client.http.entity.HttpReqItem;
 
 /**

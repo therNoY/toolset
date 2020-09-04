@@ -21,7 +21,7 @@ import pers.mihao.toolset.net.client.http.entity.HttpReqCollect;
 import pers.mihao.toolset.net.client.http.entity.HttpReqItem;
 import pers.mihao.toolset.net.client.http.service.HttpReqService;
 import pers.mihao.toolset.net.client.http.service.HttpReqItemService;
-import pers.mihao.toolset.util.AuthUtil;
+import pers.mihao.toolset.auth.AuthUtil;
 import pers.mihao.toolset.util.CollectionUtil;
 import pers.mihao.toolset.util.RespHelper;
 import pers.mihao.toolset.dto.RespResult;

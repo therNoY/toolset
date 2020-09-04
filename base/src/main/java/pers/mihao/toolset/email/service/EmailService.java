@@ -12,7 +12,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import pers.mihao.toolset.auth.dto.RegisterDto;
+import pers.mihao.toolset.dto.RegisterDto;
 import pers.mihao.toolset.email.EmailTemp;
 
 @Service

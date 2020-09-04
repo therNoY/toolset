@@ -1,8 +1,8 @@
 package pers.mihao.toolset.client.redis;
 
-import pers.mihao.toolset.serverClient.base.AbstractPool;
-import pers.mihao.toolset.serverClient.base.Client;
-import pers.mihao.toolset.serverClient.base.DataSourceConfig;
+import pers.mihao.toolset.serverClient.AbstractPool;
+import pers.mihao.toolset.serverClient.Client;
+import pers.mihao.toolset.serverClient.DataSourceConfig;
 import redis.clients.jedis.Jedis;
 
 /**

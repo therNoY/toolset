@@ -2,7 +2,7 @@ package pers.mihao.toolset.client.zookeepr.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import pers.mihao.toolset.client.zookeepr.entity.ZkSource;
-import pers.mihao.toolset.serverClient.base.service.BaseSourceService;
+import pers.mihao.toolset.serverClient.service.ClientService;
 
 /**
  * <p>
@@ -12,6 +12,6 @@ import pers.mihao.toolset.serverClient.base.service.BaseSourceService;
  * @author 
  * @since 2019-11-24
  */
-public interface ZookeeperService extends IService<ZkSource>, BaseSourceService {
+public interface ZookeeperService extends IService<ZkSource>, ClientService {
 
 }

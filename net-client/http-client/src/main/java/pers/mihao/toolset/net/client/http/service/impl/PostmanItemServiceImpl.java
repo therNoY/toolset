@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import pers.mihao.toolset.annotation.KnowledgePoint;
+import pers.mihao.toolset.common.annotation.KnowledgePoint;
 import pers.mihao.toolset.net.client.http.consts.enums.ItemStatus;
 import pers.mihao.toolset.net.client.http.consts.enums.PostmanConst;
 import pers.mihao.toolset.net.client.http.dao.HttpReqItemDao;
@@ -37,7 +37,7 @@ import pers.mihao.toolset.net.client.http.service.HttpReqHistoryService;
 import pers.mihao.toolset.net.client.http.service.HttpReqItemService;
 import pers.mihao.toolset.constant.RedisKey;
 import pers.mihao.toolset.enums.HttpMethod;
-import pers.mihao.toolset.util.AuthUtil;
+import pers.mihao.toolset.auth.AuthUtil;
 import pers.mihao.toolset.util.EnumUtil;
 import pers.mihao.toolset.dto.MyException;
 

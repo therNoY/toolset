@@ -19,7 +19,13 @@
       <artifactId>base</artifactId>
       <version>${project.version}</version>
       <scope>compile</scope>
-    </dependency>
+    </dependency><dependency>
+    <groupId>pers.mihao.toolset</groupId>
+    <artifactId>auth</artifactId>
+    <version>${project.version}</version>
+    <scope>compile</scope>
+  </dependency>
+
   </dependencies>
 
 </project>

@@ -27,6 +27,7 @@
         <module>music/kugou</module>
         <module>music/ntes</module>
         <module>bootstrap</module>
+      <module>auth</module>
     </modules>
 
     <properties>

@@ -2,7 +2,7 @@ package pers.mihao.toolset.client.redis;
 
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
-import pers.mihao.toolset.serverClient.base.AbstractFactory;
+import pers.mihao.toolset.serverClient.AbstractFactory;
 
 /**
  * 创建连接的Factory

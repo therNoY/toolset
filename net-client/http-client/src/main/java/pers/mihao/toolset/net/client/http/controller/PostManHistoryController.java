@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pers.mihao.toolset.net.client.http.dto.ReqAddHistory;
 import pers.mihao.toolset.net.client.http.dto.RespHistoryList;
 import pers.mihao.toolset.net.client.http.service.HttpReqHistoryService;
-import pers.mihao.toolset.util.AuthUtil;
+import pers.mihao.toolset.auth.AuthUtil;
 import pers.mihao.toolset.util.RespHelper;
 import pers.mihao.toolset.dto.RespResult;
 

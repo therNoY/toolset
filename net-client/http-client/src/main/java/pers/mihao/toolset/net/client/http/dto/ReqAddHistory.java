@@ -2,7 +2,7 @@ package pers.mihao.toolset.net.client.http.dto;
 
 import com.alibaba.fastjson.JSONObject;
 import org.hibernate.validator.constraints.URL;
-import pers.mihao.toolset.annotation.InEnum;
+import pers.mihao.toolset.common.annotation.InEnum;
 import pers.mihao.toolset.enums.HttpMethod;
 
 public class ReqAddHistory {

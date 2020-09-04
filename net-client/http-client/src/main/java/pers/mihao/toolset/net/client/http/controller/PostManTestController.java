@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pers.mihao.toolset.auth.dto.LoginDto;
+import pers.mihao.toolset.dto.LoginDto;
+import pers.mihao.toolset.dto.RespResult;
 import pers.mihao.toolset.net.client.http.dto.MapEntry;
 import pers.mihao.toolset.util.RespHelper;
-import pers.mihao.toolset.dto.RespResult;
 
 @RestController
 public class PostManTestController {

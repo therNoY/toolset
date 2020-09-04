@@ -2,7 +2,6 @@ package pers.mihao.toolset.util;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import org.springframework.beans.factory.annotation.Autowired;
 import pers.mihao.toolset.config.ErrorCode;
 import pers.mihao.toolset.dto.RespResult;
 
@@ -11,7 +10,6 @@ import java.util.Map;
 
 public class RespHelper {
 
-    @Autowired
     ErrorCode errorCode;
 
     /**

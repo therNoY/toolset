@@ -1,8 +1,8 @@
 package pers.mihao.toolset.client.redis;
 
 import org.apache.commons.pool2.impl.GenericKeyedObjectPool;
-import pers.mihao.toolset.serverClient.base.AbstractPool;
-import pers.mihao.toolset.serverClient.base.DataSourceConfig;
+import pers.mihao.toolset.serverClient.AbstractPool;
+import pers.mihao.toolset.serverClient.DataSourceConfig;
 
 
 /***

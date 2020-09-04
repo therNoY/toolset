@@ -19,7 +19,7 @@ import pers.mihao.toolset.net.client.http.dto.*;
 import pers.mihao.toolset.net.client.http.dto.HttpReqDetail;
 import pers.mihao.toolset.net.client.http.entity.HttpReqItem;
 import pers.mihao.toolset.net.client.http.service.HttpReqItemService;
-import pers.mihao.toolset.util.AuthUtil;
+import pers.mihao.toolset.auth.AuthUtil;
 import pers.mihao.toolset.util.RespHelper;
 import pers.mihao.toolset.dto.RespResult;
 
