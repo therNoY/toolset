@@ -28,6 +28,7 @@ public class User implements Serializable {
     /**
      * 用户名
      */
+    @TableId
     private String name;
 
     /**

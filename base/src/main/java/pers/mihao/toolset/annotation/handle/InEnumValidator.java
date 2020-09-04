@@ -3,7 +3,7 @@ package pers.mihao.toolset.annotation.handle;
 import pers.mihao.toolset.annotation.InEnum;
 import pers.mihao.toolset.enums.BaseEnum;
 import pers.mihao.toolset.enums.HttpMethod;
-import pers.mihao.toolset.vo.MyException;
+import pers.mihao.toolset.dto.MyException;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

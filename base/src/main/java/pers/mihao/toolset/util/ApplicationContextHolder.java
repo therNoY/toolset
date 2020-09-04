@@ -1,7 +1,7 @@
 package pers.mihao.toolset.util;
 
 import org.springframework.context.ApplicationContext;
-import pers.mihao.toolset.vo.MyException;
+import pers.mihao.toolset.dto.MyException;
 
 import java.util.Map;
 

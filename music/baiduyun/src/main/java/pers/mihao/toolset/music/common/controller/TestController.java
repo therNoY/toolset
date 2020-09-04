@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pers.mihao.toolset.util.RespHelper;
-import pers.mihao.toolset.vo.RespResult;
+import pers.mihao.toolset.dto.RespResult;
 import pers.mihao.toolset.music.common.dto.Music;
 
 @RestController

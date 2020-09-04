@@ -14,11 +14,10 @@ import pers.mihao.toolset.auth.dao.UserRoleRelationDao;
 import pers.mihao.toolset.auth.dto.RegisterDto;
 import pers.mihao.toolset.auth.entity.Permission;
 import pers.mihao.toolset.auth.entity.User;
-import pers.mihao.toolset.auth.entity.UserRoleRelation;
+import pers.mihao.toolset.auth.entity.UserRole;
 import pers.mihao.toolset.auth.service.UserService;
 import pers.mihao.toolset.constant.RedisKey;
 
-import java.net.PasswordAuthentication;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -87,9 +86,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         user.setEmail(registerDto.getEmail());
         userDao.insert(user);
         if (user.getId() != null) {
-            UserRoleRelation userRoleRelation = new UserRoleRelation();
-            userRoleRelation.setUserId(user.getId());
-            userRoleRelationDao.insert(userRoleRelation);
+            UserRole userRole = new UserRole();
+            userRole.setUserId(user.getId());
+            userRoleRelationDao.insert(userRole);
             return;
         }
         log.error("插入用户没有返回主键{}", user);

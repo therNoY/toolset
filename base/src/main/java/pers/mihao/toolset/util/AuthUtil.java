@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import pers.mihao.toolset.annotation.KnowledgePoint;
-import pers.mihao.toolset.vo.MyException;
-import pers.mihao.toolset.vo.MyUserDetails;
+import pers.mihao.toolset.dto.MyException;
+import pers.mihao.toolset.dto.MyUserDetails;
 
 /**
  * 和用户身份相关的工具类

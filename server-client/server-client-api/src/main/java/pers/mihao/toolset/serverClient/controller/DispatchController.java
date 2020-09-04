@@ -16,7 +16,7 @@ import pers.mihao.toolset.serverClient.base.service.BaseSourceService;
 import pers.mihao.toolset.util.ApplicationContextHolder;
 import pers.mihao.toolset.util.EnumUtil;
 import pers.mihao.toolset.util.RespHelper;
-import pers.mihao.toolset.vo.RespResult;
+import pers.mihao.toolset.dto.RespResult;
 
 @RestController
 public class DispatchController {

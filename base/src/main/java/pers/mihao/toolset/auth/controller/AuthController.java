@@ -16,7 +16,7 @@ import pers.mihao.toolset.auth.service.UserService;
 import pers.mihao.toolset.util.JwtTokenHelper;
 import pers.mihao.toolset.util.RedisHelper;
 import pers.mihao.toolset.util.RespHelper;
-import pers.mihao.toolset.vo.RespResult;
+import pers.mihao.toolset.dto.RespResult;
 import pers.mihao.toolset.auth.dto.LoginDto;
 import pers.mihao.toolset.email.service.EmailService;
 

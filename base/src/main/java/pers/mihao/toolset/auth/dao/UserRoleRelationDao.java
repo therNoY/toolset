@@ -1,7 +1,7 @@
 package pers.mihao.toolset.auth.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import pers.mihao.toolset.auth.entity.UserRoleRelation;
+import pers.mihao.toolset.auth.entity.UserRole;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import pers.mihao.toolset.auth.entity.UserRoleRelation;
  * @author mihao
  * @since 2019-08-10
  */
-public interface UserRoleRelationDao extends BaseMapper<UserRoleRelation> {
+public interface UserRoleRelationDao extends BaseMapper<UserRole> {
 
 }

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pers.mihao.toolset.util.RespHelper;
-import pers.mihao.toolset.vo.RespResult;
+import pers.mihao.toolset.dto.RespResult;
 import pers.mihao.toolset.music.ntes.dto.Music163;
 import pers.mihao.toolset.music.ntes.service.Music163Service;
 

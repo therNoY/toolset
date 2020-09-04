@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pers.mihao.toolset.util.RespHelper;
-import pers.mihao.toolset.vo.MyException;
-import pers.mihao.toolset.vo.RespResult;
+import pers.mihao.toolset.dto.MyException;
+import pers.mihao.toolset.dto.RespResult;
 
 /**
  * 配置捕获全局异常

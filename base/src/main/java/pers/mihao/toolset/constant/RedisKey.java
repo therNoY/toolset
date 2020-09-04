@@ -7,12 +7,12 @@ public interface RedisKey {
 
     String HTTP_COMMON_HEADERS = "httpCommonHeaders";
     // 用户保存的item
-    String USER_POSTMAN_SAVE_ITEM = "userPostmanSaveItem";
+    String USER_HTTP_REQ_SAVE_ITEM = "userHttpReqSaveItem";
     // 用户收藏
-    String USER_POSTMAN_COLLECTION = "userPostmanCollection";
+    String USER_HTTP_REQ_COLLECTION = "userHttpReqCollection";
     // 用户
-    String USER_POSTMAN_HISTORY = "userPostmanHistory";
-    String USER_POSTMAN_HISTORY_ = "userPostmanHistory::";
+    String USER_HTTP_REQ_HISTORY = "userHttpReqHistory";
+    String USER_HTTP_REQ_HISTORY_ = "userHttpReqHistory::";
 
-    String USER_POSTMAN_EDIT = "userEdit"; // 用户正在编辑的item
+    String USER_HTTP_REQ_EDIT = "userEdit"; // 用户正在编辑的item
 }

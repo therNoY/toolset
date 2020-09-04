@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pers.mihao.toolset.enums.HttpMethod;
 import pers.mihao.toolset.util.RespHelper;
-import pers.mihao.toolset.vo.RespResult;
+import pers.mihao.toolset.dto.RespResult;
 import pers.mihao.toolset.music.kugou.DTO.KuGouMusic;
 import pers.mihao.toolset.music.kugou.DTO.RespKuGouMusic;
 import pers.mihao.toolset.client.net.http.apiImpl.RestTemp;
@@ -32,8 +32,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import pers.mihao.toolset.vo.Uri;
-import pers.mihao.toolset.vo.test_dto.ESClient;
+import pers.mihao.toolset.dto.Uri;
+import pers.mihao.toolset.dto.test_dto.ESClient;
 
 @RestController
 public class KuGouMusicController {

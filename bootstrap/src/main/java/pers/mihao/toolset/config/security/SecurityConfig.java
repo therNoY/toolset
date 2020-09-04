@@ -22,8 +22,8 @@ import org.springframework.web.filter.CorsFilter;
 import pers.mihao.toolset.auth.entity.Permission;
 import pers.mihao.toolset.auth.entity.User;
 import pers.mihao.toolset.auth.service.UserService;
-import pers.mihao.toolset.vo.MyException;
-import pers.mihao.toolset.vo.MyUserDetails;
+import pers.mihao.toolset.dto.MyException;
+import pers.mihao.toolset.dto.MyUserDetails;
 
 import java.util.List;
 

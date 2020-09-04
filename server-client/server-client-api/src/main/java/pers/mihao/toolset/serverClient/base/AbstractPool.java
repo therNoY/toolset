@@ -7,7 +7,7 @@ import org.apache.commons.pool2.impl.GenericKeyedObjectPool;
 import org.apache.commons.pool2.impl.GenericKeyedObjectPoolConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pers.mihao.toolset.vo.MyException;
+import pers.mihao.toolset.dto.MyException;
 
 /**
  * 抽象构造对应资源的连接池
